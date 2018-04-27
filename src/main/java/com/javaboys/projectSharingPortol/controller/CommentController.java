@@ -18,7 +18,7 @@ import com.javaboys.projectSharingPortol.dto.CommentDto;
 import com.javaboys.projectSharingPortol.response.CommentResponse;
 import com.javaboys.projectSharingPortol.response.CommentUpdateResponse;
 import com.javaboys.projectSharingPortol.service.CommentService;
-
+//nothing
 @RestController
 @RequestMapping("/comment")
 public class CommentController {
