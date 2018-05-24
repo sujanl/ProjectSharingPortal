@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.javaboys.projectSharingPortol.dto.UserDto;
 import com.javaboys.projectSharingPortol.dto.UserUpdateDto;
+import com.javaboys.projectSharingPortol.exception.ExceptionHandler;
 import com.javaboys.projectSharingPortol.model.Project;
 import com.javaboys.projectSharingPortol.model.User;
 import com.javaboys.projectSharingPortol.repository.ProjectRepository;
 import com.javaboys.projectSharingPortol.repository.UserRepository;
 import com.javaboys.projectSharingPortol.response.UserResponse;
+import com.javaboys.projectSharingPortol.utility.EmailValidator;
 import com.javaboys.projectSharingPortol.utility.GenerateToken;
 import com.javaboys.projectSharingPortol.utility.LoginStatus;
 import com.javaboys.projectSharingPortol.utility.PasswordEncryptDecrypt;
@@ -31,6 +33,9 @@ public class UserService {
 			throw new ExceptionHandler(userDto.getUsername()+", username already exist.");
 		}*/
 		user.setContact(userDto.getContact());
+		if(EmailValidator.validateEmail(userDto.getEmail()) == false) {
+			throw new ExceptionHandler("Invalid email");
+		}
 		user.setEmail(userDto.getEmail());
 		user.setFullname(userDto.getFullname());
 		user.setPassword(PasswordEncryptDecrypt.doEncrypt(userDto.getPassword()));
